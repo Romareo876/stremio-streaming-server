@@ -1,6 +1,4 @@
 build:
   docker:
     web: Dockerfile
-run: 
-  command: docker run -p 11470:11470 -v ${PWD}:/root/.stremio-server --name=stremio-streaming-server sleeyax/stremio-streaming-server
 
