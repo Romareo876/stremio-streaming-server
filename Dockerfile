@@ -2,11 +2,15 @@ FROM node:14.15.0-alpine
 
 WORKDIR /stremio
 
-ARG VERSION=4.4.142
+ARG VERSION=master
 
 RUN apk add --no-cache wget ffmpeg
-RUN wget http://dl.strem.io/four/v${VERSION}/server.js
-RUN wget http://dl.strem.io/four/v${VERSION}/stremio.asar
+RUN wget http://dl.strem.io/four/${VERSION}/server.js
+RUN wget http://dl.strem.io/four/${VERSION}/stremio.asar
+
+# apply patch to skip CORS headers verification
+# see: https://github.com/sleeyax/stremio-streaming-server/issues/5
+RUN sed -i 's/if (ok) enginefs.sendCORSHeaders/if (true) enginefs.sendCORSHeaders/g' server.js
 
 VOLUME ["/root/.stremio-server"]
 
