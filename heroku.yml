@@ -1,4 +1,6 @@
 build:
   docker:
     web: Dockerfile
+run:
+  web: docker run -p 11470:11470 -e FIX_UNSUPPORTED_MEDIA=1 -v ${PWD}:/root/.stremio-server --name=stremio-streaming-server sleeyax/stremio-streaming-serve
 
